@@ -1,0 +1,95 @@
+.container {
+  max-width: 80rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.loadingContainer {
+  max-width: 80rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 4rem 1rem;
+}
+
+.loadingSpinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.spinnerAnimation {
+  animation: spin 1s linear infinite;
+  border-radius: 9999px;
+  height: 3rem;
+  width: 3rem;
+  border-bottom: 2px solid #3b82f6;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.errorContainer {
+  max-width: 80rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 4rem 1rem;
+}
+
+.errorContent {
+  background-color: #fef2f2;
+  border: 1px solid #fee2e2;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.errorTitle {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: #991b1b;
+  margin-bottom: 0.5rem;
+}
+
+.errorMessage {
+  color: #b91c1c;
+}
+
+.retryButton {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: #dc2626;
+  color: white;
+  border-radius: 0.5rem;
+}
+
+.retryButton:hover {
+  background-color: #b91c1c;
+}
+
+.pageHeader {
+  margin-bottom: 2rem;
+}
+
+.pageTitle {
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+:global(.dark) .pageTitle {
+  color: rgba(255, 255, 255, 0.7);
+} 
+
+.pageDescription {
+  color: rgba(0, 0, 0, 0.7);
+  margin-top: 0.5rem;
+}
+
+:global(.dark) .pageDescription {
+  color: rgba(255, 255, 255, 0.7);
+} 

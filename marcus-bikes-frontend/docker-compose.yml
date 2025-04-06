@@ -3,31 +3,28 @@ version: '3.8'
 services:
   frontend:
     build:
-      context: ./marcus-bikes-frontend
+      context: .
       dockerfile: Dockerfile
     ports:
       - "3000:3000"
     environment:
       - NEXT_PUBLIC_API_URL=http://localhost:8000
     volumes:
-      - ./marcus-bikes-frontend/src:/app/src
+      - ./src:/app/src
     depends_on:
       - backend
 
   backend:
     build:
-      context: ./marcus-bikes-backend
+      context: ../marcus-bikes-backend
       dockerfile: Dockerfile
     environment:
       - DATABASE_URL=postgresql://postgres:postgres@db/marcus_bikes_db
     ports:
       - "8000:8000"
-    volumes:
-      - ./marcus-bikes-backend:/app
     depends_on:
       db:
         condition: service_healthy
-    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
   
   db:
     image: postgres:15
