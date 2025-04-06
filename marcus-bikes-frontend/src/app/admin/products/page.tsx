@@ -9,7 +9,7 @@ interface Product {
   name: string;
   description: string;
   category: string;
-  base_price: number;
+  basePrice: number;
   components: any[];
 }
 
@@ -171,7 +171,7 @@ export default function AdminProducts() {
                       </span>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      ${(product.base_price || 0).toFixed(2)}
+                      ${(product.basePrice || 0).toFixed(2)}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                       {product.components?.length || 0}

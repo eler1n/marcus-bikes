@@ -43,4 +43,11 @@ if __name__ == "__main__":
     script_dir = os.path.dirname(os.path.abspath(__file__))
     os.chdir(script_dir)
     
+    # Add the current directory to the Python path so that the app module can be found
+    if script_dir not in sys.path:
+        sys.path.insert(0, script_dir)
+    
+    # Set PYTHONPATH environment variable
+    os.environ["PYTHONPATH"] = script_dir
+    
     sys.exit(run_migrations()) 
