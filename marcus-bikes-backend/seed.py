@@ -297,12 +297,12 @@ custom_bike = ProductCreate(
                 OptionCreate(
                     name="8-speed Chain",
                     price=55,
-                    in_stock=False
+                    in_stock=True
                 ),
                 OptionCreate(
                     name="12-speed Chain",
                     price=75,
-                    in_stock=True
+                    in_stock=False
                 )
             ]
         ),
@@ -526,7 +526,7 @@ try:
                         "Frame Finish": "Matte",
                         "Wheels": "Mountain Wheels",
                         "Rim Color": "Black",
-                        "Chain": "Twelve-speed Chain",
+                        "Chain": "8-speed Chain",
                         "Saddle": "Sport Saddle"
                     }
                 }
@@ -597,7 +597,7 @@ try:
                         "Frame Finish": "Matte",
                         "Wheels": "Fat Bike Wheels",
                         "Rim Color": "Black",
-                        "Chain": "Twelve-speed Chain",
+                        "Chain": "8-speed Chain",
                         "Saddle": "Comfort Saddle"
                     }
                 }

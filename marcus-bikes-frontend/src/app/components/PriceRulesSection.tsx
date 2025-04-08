@@ -105,12 +105,9 @@ const PriceRulesSection: FC<PriceRulesSectionProps> = ({
       price: 0,
       product_id: productId
     };
-
-    console.log('Created new rule:', newRule);
     
     // Apply normalization to the new rule
     const normalizedRule = normalizeRules([newRule])[0];
-    console.log('Normalized new rule:', normalizedRule);
     
     setPriceRules([...priceRules, normalizedRule]);
   };
@@ -121,17 +118,16 @@ const PriceRulesSection: FC<PriceRulesSectionProps> = ({
     // Convert the value to a number when it should be a number
     const numericValue = typeof value === 'string' ? parseInt(value, 10) : value;
     
-    console.log(`Updating price rule at index ${index}, field ${field}, value ${value}, numericValue ${numericValue}`);
     
     if (field === 'component_id' && numericValue !== updatedRules[index].component_id) {
       // If component changes, reset the option to the first available option
-      console.log(`Looking for component with component_id=${numericValue}`);
+      // console.log(`Looking for component with component_id=${numericValue}`);
       components.forEach(c => console.log(`Available component: id=${c.id}, component_id=${c.id}, name=${c.name}`));
       
       const component = components.find(c => c.id === numericValue);
       const firstOption = component?.options[0]?.id || 0;
       
-      console.log('Component changed:', numericValue, 'First option:', firstOption, 'Component:', component);
+      // console.log('Component changed:', numericValue, 'First option:', firstOption, 'Component:', component);
       
       updatedRules[index] = {
         ...updatedRules[index],
@@ -140,13 +136,13 @@ const PriceRulesSection: FC<PriceRulesSectionProps> = ({
       };
     } else if (field === 'dependent_component_id' && numericValue !== updatedRules[index].dependent_component_id) {
       // If dependent component changes, reset the dependent option
-      console.log(`Looking for dependent component with component_id=${numericValue}`);
-      components.forEach(c => console.log(`Available component: id=${c.id}, component_id=${c.id}, name=${c.name}`));
+      // console.log(`Looking for dependent component with component_id=${numericValue}`);
+      // components.forEach(c => console.log(`Available component: id=${c.id}, component_id=${c.id}, name=${c.name}`));
       
       const component = components.find(c => c.id === numericValue);
       const firstOption = component?.options[0]?.id || 0;
       
-      console.log('Dependent component changed:', numericValue, 'First option:', firstOption, 'Component:', component);
+      // console.log('Dependent component changed:', numericValue, 'First option:', firstOption, 'Component:', component);
       
       updatedRules[index] = {
         ...updatedRules[index],
@@ -167,7 +163,7 @@ const PriceRulesSection: FC<PriceRulesSectionProps> = ({
       };
     }
     
-    console.log('Updated rule:', updatedRules[index]);
+    // console.log('Updated rule:', updatedRules[index]);
     setPriceRules(updatedRules);
   };
 
@@ -176,12 +172,6 @@ const PriceRulesSection: FC<PriceRulesSectionProps> = ({
     updatedRules.splice(index, 1);
     setPriceRules(updatedRules);
   };
-
-  // Add logging to help debug
-  useEffect(() => {
-    console.log('PriceRulesSection components:', components);
-    console.log('PriceRulesSection priceRules:', priceRules);
-  }, [components, priceRules]);
 
   const getComponentName = (componentId: number) => {
     const component = components.find(c => c.id === componentId);
@@ -254,19 +244,6 @@ const PriceRulesSection: FC<PriceRulesSectionProps> = ({
       };
     });
   };
-  
-  // Use this function when initializing and updating rules
-  // useEffect(() => {
-  //   const initialRulesJSON = JSON.stringify(initialPriceRules);
-  //   const currentRulesJSON = JSON.stringify(priceRules);
-    
-  //   // Only update if the initial rules have changed and are different from current state
-  //   if (initialRulesJSON !== currentRulesJSON) {
-  //     // Normalize initial rules to ensure they have valid component and option IDs
-  //     const normalizedRules = normalizeRules(initialPriceRules || []);
-  //     setPriceRules(normalizedRules);
-  //   }
-  // }, [initialPriceRules, components]);
 
   return (
     <div>

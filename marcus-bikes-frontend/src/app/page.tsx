@@ -149,10 +149,12 @@ export default function Home() {
               <div className={styles.productCard}>
                 <div className={styles.productImageContainer}>
                   <div className="opacity-40">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-24 w-24 text-blue-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 20L8 4M16 20L20 4M4 20L16 20M8 4L20 4" />
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 12L18 12" />
-                    </svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-24 w-24 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    {/* Left ski */}
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 3c-.5 6 0 12 0 18M6 10h2M6 14h2" />
+                    {/* Right ski */}
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 3c.5 6 0 12 0 18M16 10h2M16 14h2" />
+                  </svg>
                   </div>
                 </div>
                 <div className="p-4">

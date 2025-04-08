@@ -299,7 +299,6 @@ export default function ProductEditPage({ params }: { params: { id: string } }) 
       }
 
       const savedData = await response.json();
-      console.log('Response from server:', savedData);
 
       router.push('/admin/products');
     } catch (error: any) {
