@@ -164,8 +164,9 @@ INSERT INTO options (
     price,         -- The price premium for this color
     in_stock,      -- Initially set to true
     component_id,  -- References the "Rim Color" component
-    stock_quantity -- Default initial quantity
+    stock_quantity -- Default initial quantity = 0
 
+Could also perform an insert on the inventory table but that's missing atm:
 Inventory Table:
 INSERT INTO inventory (
     option_id,           -- References the newly created option
@@ -174,6 +175,28 @@ INSERT INTO inventory (
     low_stock_threshold  -- Typically set to 7 for rim colors
 )
 
-Example from the seed data shows how rim colo
 
 Setting prices: How can Marcus change the price of a specific part or specify particular pricing for combinations of choices? How does the UI and database handle this?
+
+Let's say Marcus wants to offer a special price when customers select a specific frame color with specific rims:
+- He goes to the product editor
+- Opens the "Price Rules" section
+- Creates a new rule:
+    - Selects "Frame Color" as the component
+    - Chooses "Red" as the option
+    - Selects "Rim Color" as the dependent component
+    - Chooses "Black" as the dependent option
+    - Sets a special price of $200 (which might be less than the sum of individual prices)
+- When customers select this combination, they'll see both the original total price and the special combined price
+
+Database Changes:
+When the new price rule is added, the following database changes occur:
+Options Table:
+INSERT INTO price_rules (
+    component_id,               -- The primary component
+    option_id                   -- The primary option
+    dependent_component_id,     -- The secondary component
+    dependent_option_id,        -- The secondary option
+    price,                      -- The special price for this combination
+    product_id,                 -- The product this rule applies to
+)
