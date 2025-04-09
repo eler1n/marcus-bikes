@@ -59,7 +59,7 @@ export default function AdminInventory() {
         });
         if (!inventoryResponse.ok) throw new Error('Failed to fetch inventory');
         const inventoryData = await inventoryResponse.json();
-        console.log('Inventory data received:', inventoryData);
+        
         setInventory(inventoryData);
         
         // Fetch options data to display names

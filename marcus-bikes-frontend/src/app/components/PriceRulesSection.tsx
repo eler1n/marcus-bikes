@@ -79,23 +79,6 @@ const PriceRulesSection: FC<PriceRulesSectionProps> = ({
     if (secondComponent.options && secondComponent.options.length > 0) {
       secondOption = secondComponent.options[0];
     }
-    
-    console.log('Adding new rule with:', {
-      firstComponent: {
-        id: firstComponent.id,
-        component_id: firstComponent.id,
-        name: firstComponent.name,
-        optionsCount: firstComponent.options?.length || 0
-      },
-      firstOption,
-      secondComponent: {
-        id: secondComponent.id,
-        component_id: secondComponent.id,
-        name: secondComponent.name,
-        optionsCount: secondComponent.options?.length || 0
-      },
-      secondOption
-    });
 
     const newRule: PriceRule = {
       component_id: firstComponent.id,
@@ -122,7 +105,7 @@ const PriceRulesSection: FC<PriceRulesSectionProps> = ({
     if (field === 'component_id' && numericValue !== updatedRules[index].component_id) {
       // If component changes, reset the option to the first available option
       // console.log(`Looking for component with component_id=${numericValue}`);
-      components.forEach(c => console.log(`Available component: id=${c.id}, component_id=${c.id}, name=${c.name}`));
+      // components.forEach(c => console.log(`Available component: id=${c.id}, component_id=${c.id}, name=${c.name}`));
       
       const component = components.find(c => c.id === numericValue);
       const firstOption = component?.options[0]?.id || 0;
@@ -208,7 +191,7 @@ const PriceRulesSection: FC<PriceRulesSectionProps> = ({
       const componentExists = components.some(c => c.id === rule.component_id);
       if (!componentExists && components.length > 0) {
         validComponentId = components[0].id;
-        console.log(`Normalizing rule: component_id ${rule.component_id} not found, using ${validComponentId} instead`);
+        // console.log(`Normalizing rule: component_id ${rule.component_id} not found, using ${validComponentId} instead`);
       }
       
       // Validate option_id
@@ -216,14 +199,14 @@ const PriceRulesSection: FC<PriceRulesSectionProps> = ({
       const optionExists = component?.options.some(o => o.id === rule.option_id);
       if (!optionExists && component && component.options.length > 0) {
         validOptionId = component.options[0].id;
-        console.log(`Normalizing rule: option_id ${rule.option_id} not found for component ${validComponentId}, using ${validOptionId} instead`);
+        // console.log(`Normalizing rule: option_id ${rule.option_id} not found for component ${validComponentId}, using ${validOptionId} instead`);
       }
       
       // Validate dependent_component_id
       const dependentComponentExists = components.some(c => c.id === rule.dependent_component_id);
       if (!dependentComponentExists && components.length > 0) {
         validDependentComponentId = components[0].id;
-        console.log(`Normalizing rule: dependent_component_id ${rule.dependent_component_id} not found, using ${validDependentComponentId} instead`);
+        // console.log(`Normalizing rule: dependent_component_id ${rule.dependent_component_id} not found, using ${validDependentComponentId} instead`);
       }
       
       // Validate dependent_option_id
@@ -231,7 +214,7 @@ const PriceRulesSection: FC<PriceRulesSectionProps> = ({
       const dependentOptionExists = dependentComponent?.options.some(o => o.id === rule.dependent_option_id);
       if (!dependentOptionExists && dependentComponent && dependentComponent.options.length > 0) {
         validDependentOptionId = dependentComponent.options[0].id;
-        console.log(`Normalizing rule: dependent_option_id ${rule.dependent_option_id} not found for component ${validDependentComponentId}, using ${validDependentOptionId} instead`);
+        // console.log(`Normalizing rule: dependent_option_id ${rule.dependent_option_id} not found for component ${validDependentComponentId}, using ${validDependentOptionId} instead`);
       }
       
       // Return normalized rule
@@ -309,12 +292,7 @@ const PriceRulesSection: FC<PriceRulesSectionProps> = ({
                           className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                         >
                           {(() => {
-                            // Add detailed logging to diagnose the issue
-                            console.log(`Looking for component with component_id=${rule.component_id}`);
-                            components.forEach(c => console.log(`Available component: id=${c.id}, component_id=${c.id}, name=${c.name}`));
-                            
                             const selectedComponent = components.find(c => c.id === rule.component_id);
-                            console.log('Selected component for options:', selectedComponent);
                             
                             if (selectedComponent && selectedComponent.options && selectedComponent.options.length > 0) {
                               return selectedComponent.options.map(option => (
@@ -362,13 +340,9 @@ const PriceRulesSection: FC<PriceRulesSectionProps> = ({
                           className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                         >
                           {(() => {
-                            // Add detailed logging to diagnose the issue
-                            console.log(`Looking for component with component_id=${rule.dependent_component_id}`);
-                            components.forEach(c => console.log(`Available dependent component: id=${c.id}, component_id=${c.id}, name=${c.name}`));
                             
                             const selectedDepComponent = components.find(c => c.id === rule.dependent_component_id);
-                            console.log('Selected dependent component for options:', selectedDepComponent);
-                            
+
                             if (selectedDepComponent && selectedDepComponent.options && selectedDepComponent.options.length > 0) {
                               return selectedDepComponent.options.map(option => (
                                 <option key={option.id} value={option.id}>

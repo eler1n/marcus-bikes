@@ -14,7 +14,6 @@ export default function ThemeToggle() {
   }, []);
 
   const handleToggle = () => {
-    console.log('Current theme before toggle:', theme);
     toggleTheme();
   };
 
