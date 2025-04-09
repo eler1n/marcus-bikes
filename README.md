@@ -12,56 +12,93 @@ Marcus Bikes is a modular e-commerce platform that enables customers to create c
 - **marcus-bikes-backend**: FastAPI backend application with SQLAlchemy ORM
 - **docker-compose.yml**: Docker configuration for running the complete stack
 
-## Core Model
+## Core Features
 
-The marcus-bikes Bicycle Shop is built around a flexible product customization system:
-
-#### Database Schema
-
-The application uses PostgreSQL with the following main tables:
-- `products`: Base products and categories (bicycles, skis, surfboards, rollerskates)
-- `components`: Customizable parts for each product (frames, wheels, handlebars, etc.)
-- `options`: Available choices for each component (materials, colors, sizes)
-- `inventory`: Stock tracking for options (quantity, availability)
-- `configurations`: Saved product configurations (customer selections)
-- `orders`: Customer orders (status, payment info, shipping)
-- `users`: Customer accounts and profiles (authentication, preferences)
-
-#### API Endpoints
-
-- `/api/products`: List available products and categories
-- `/api/products/{id}/components`: Get customizable components for a product
-- `/api/components/{id}/options`: Get available options for a component
-- `/api/configurations`: Create/read/update customized products
-- `/api/orders`: Manage customer orders and checkout process
-- `/api/users`: User account management
-- `/api/inventory`: Inventory status and updates
-
-## Features
-
+### Product Management
 - Product catalog with categories (bicycles, skis, surfboards, rollerskates)
 - Interactive product customization with real-time pricing
-- Dynamic component/option dependencies (compatibility rules)
-- Inventory management with stock tracking
-- Shopping cart and secure checkout process
-- User accounts and saved configurations
-- Admin dashboard for product and inventory management
+- Component and option management
+- Dynamic pricing based on selected options
+
+### Order Management
+- Shopping cart functionality
+- Order processing and tracking
+- Order filtering by date range, status, and product category
+
+### Inventory Management
+- Stock tracking for options
+- Low stock alerts
+- Inventory updates through admin interface
+
+### Admin Features
+- Admin authentication and authorization
+- Price rule configuration
+- Inventory management
+- Order management
+- Product and category management
 
 ## Technology Stack
 
 ### Frontend
-- **Next.js**: React framework for server-side rendering and routing
-- **TypeScript**: Type-safe JavaScript
-- **TailwindCSS**: Utility-first CSS framework
+- **Next.js 14.0.4**: React framework for server-side rendering and routing
+- **React 18.2.0**: UI library
+- **TypeScript 5**: Type-safe JavaScript
+- **TailwindCSS 3.3.6**: Utility-first CSS framework
 - **React Context API**: State management
-- **Fetch API**: Data fetching from backend
+- **Hero Icons**: Icon library
+- **React Hot Toast**: Toast notifications
+- **Date-fns**: Date manipulation library
 
 ### Backend
-- **FastAPI**: High-performance Python web framework
-- **SQLAlchemy**: SQL toolkit and ORM
+- **FastAPI 0.104.1**: High-performance Python web framework
+- **SQLAlchemy 2.0.23**: SQL toolkit and ORM
 - **PostgreSQL**: Relational database
-- **Pydantic**: Data validation and settings management
-- **Alembic**: Database migration tool
+- **Pydantic 2.4.2**: Data validation and settings management
+- **Alembic 1.12.1**: Database migration tool
+- **PyJWT 2.8.0**: JWT authentication
+
+## API Endpoints
+
+### Products
+- `GET /products` - List all products (with pagination and category filter)
+- `GET /products/categories` - Get all product categories
+- `GET /products/category/counts` - Get counts of products for each category
+- `GET /products/{product_id}` - Get a specific product
+- `POST /products` - Create a new product
+- `PUT /products/{product_id}` - Update a product
+- `DELETE /products/{product_id}` - Delete a product
+
+### Options
+- `GET /options` - List all options (with pagination)
+- `PUT /options/{option_id}/stock` - Update option stock status
+
+### Orders
+- `GET /orders` - List all orders (with pagination)
+- `POST /orders/filter` - Filter orders by date range, status, and product category
+- `GET /orders/{order_id}` - Get a specific order
+- `POST /orders` - Create a new order
+- `PATCH /orders/{order_id}` - Update an order
+- `DELETE /orders/{order_id}` - Delete an order
+
+### Inventory
+- `GET /inventory` - List all inventory records (with pagination)
+- `GET /inventory/low-stock` - Get all items with low or out of stock status
+- `GET /inventory/option/{option_id}` - Get inventory record for a specific option
+- `POST /inventory` - Create a new inventory record
+- `PATCH /inventory/option/{option_id}` - Update an inventory record
+- `DELETE /inventory/option/{option_id}` - Delete an inventory record
+
+### Admin
+- `POST /admin/login` - Authenticate as admin
+- `GET /admin/verify` - Verify admin credentials
+
+### Price Rules
+- `GET /price-rules` - List all price rules (with pagination)
+- `GET /price-rules/product/{product_id}` - Get price rules for a specific product
+- `GET /price-rules/{price_rule_id}` - Get a specific price rule
+- `POST /price-rules` - Create a new price rule (requires admin auth)
+- `PUT /price-rules/{price_rule_id}` - Update a price rule (requires admin auth)
+- `DELETE /price-rules/{price_rule_id}` - Delete a price rule (requires admin auth)
 
 ## Prerequisites
 
@@ -131,8 +168,8 @@ python seed.py  # Populate with initial data (optional)
 6. Run the backend server:
 ```bash
 uvicorn app.main:app --reload
-# Or use the provided script to seed the database with dummy data:
-# ./run_dev.sh
+# Or use the provided script:
+./run_dev.sh
 ```
 
 ### Frontend
@@ -164,11 +201,13 @@ npm run dev
    - API endpoints are located in `marcus-bikes-backend/app/routes/`
    - Business logic is in `marcus-bikes-backend/app/services/`
    - Data validation schemas are in `marcus-bikes-backend/app/schemas/`
+   - Database migrations are managed with Alembic
 
 2. **Frontend Development**:
    - Components are located in `marcus-bikes-frontend/src/app/components/`
    - API integration is centralized in `marcus-bikes-frontend/src/app/lib/api.ts`
    - Page components are in their respective route directories
+   - Admin functionality is in `marcus-bikes-frontend/src/app/admin/`
    - Styles are managed with TailwindCSS
 
 3. **Database Changes**:

@@ -1,0 +1,18 @@
+
+
+:global(.dark) .cartTitle {
+  color: white;
+}
+
+:global(.dark) .cartDescription {
+  color: white;
+}
+.cartTitle {
+  color: black;
+  font-size: 2rem;
+}
+
+.cartDescription {
+  color: black;
+  font-size: 1rem;
+}   

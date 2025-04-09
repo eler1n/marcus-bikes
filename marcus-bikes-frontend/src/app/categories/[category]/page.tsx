@@ -109,7 +109,7 @@ export default function CategoryProductsPage() {
                   {product.description}
                 </p>
                 <p className="mt-2 text-blue-600 font-semibold">
-                  ${product.components.reduce((minPrice, component) => {
+                  From ${product.components.reduce((minPrice, component) => {
                     const minOptionPrice = Math.min(...component.options.map(opt => opt.price));
                     return minPrice + minOptionPrice;
                   }, product.basePrice).toFixed(2)}

@@ -9,13 +9,18 @@ This is the backend API for the Marcus Bikes Bicycle Shop, providing endpoints f
 - Dependency rules between components/options
 - Dynamic pricing based on selected options
 - Inventory tracking
+- Order management
+- Admin operations
+- Price rule management
 
 ## Technology Stack
 
-- FastAPI
-- SQLAlchemy
+- FastAPI 0.104.1
+- SQLAlchemy 2.0.23
 - PostgreSQL
-- Pydantic
+- Pydantic 2.4.2
+- Alembic 1.12.1 (Database migrations)
+- Docker support
 
 ## Getting Started
 
@@ -23,6 +28,7 @@ This is the backend API for the Marcus Bikes Bicycle Shop, providing endpoints f
 
 - Python 3.8 or higher
 - PostgreSQL
+- Docker and Docker Compose (optional)
 
 ### Installation
 
@@ -44,20 +50,34 @@ pip install -r requirements.txt
 DATABASE_URL=postgresql://postgres:postgres@localhost/marcus_bikes_db
 ```
 
-5. Set up the database:
+### Running the Application
+
+#### Using Docker (Recommended)
+
+1. Build and start the containers:
+```bash
+docker-compose up --build
+```
+
+2. Run database migrations:
+```bash
+docker-compose exec backend python run_migrations.py
+```
+
+#### Local Development
+
+1. Set up the database:
 ```bash
 # Create the database
 createdb marcus_bikes_db  
 
-# The tables will be automatically created when you run the application
+# Run migrations
+python run_migrations.py
 ```
 
-### Running the Application
-
-Start the development server:
-
+2. Start the development server:
 ```bash
-python run.py
+./run_dev.sh
 ```
 
 The API will be available at http://localhost:8000
@@ -69,16 +89,48 @@ API documentation can be accessed at:
 ## API Endpoints
 
 ### Products
-
-- `GET /products` - List all products
+- `GET /products` - List all products (with pagination and category filter)
+- `GET /products/categories` - Get all product categories
+- `GET /products/category/counts` - Get counts of products for each category
 - `GET /products/{product_id}` - Get a specific product
 - `POST /products` - Create a new product
 - `PUT /products/{product_id}` - Update a product
 - `DELETE /products/{product_id}` - Delete a product
 
 ### Options
-
+- `GET /options` - List all options (with pagination)
+- `GET /options/{option_id}` - Get a specific option
+- `POST /options` - Create a new option
+- `PUT /options/{option_id}` - Update an option
 - `PUT /options/{option_id}/stock` - Update option stock status
+
+### Orders
+- `GET /orders` - List all orders (with pagination)
+- `POST /orders/filter` - Filter orders by date range, status, and product category
+- `GET /orders/{order_id}` - Get a specific order
+- `POST /orders` - Create a new order
+- `PATCH /orders/{order_id}` - Update an order
+- `DELETE /orders/{order_id}` - Delete an order
+
+### Inventory
+- `GET /inventory` - List all inventory records (with pagination)
+- `GET /inventory/low-stock` - Get all items with low or out of stock status
+- `GET /inventory/option/{option_id}` - Get inventory record for a specific option
+- `POST /inventory` - Create a new inventory record
+- `PATCH /inventory/option/{option_id}` - Update an inventory record
+- `DELETE /inventory/option/{option_id}` - Delete an inventory record
+
+### Admin
+- `POST /admin/login` - Authenticate as admin
+- `GET /admin/verify` - Verify admin credentials
+
+### Price Rules
+- `GET /price-rules` - List all price rules (with pagination)
+- `GET /price-rules/product/{product_id}` - Get price rules for a specific product
+- `GET /price-rules/{price_rule_id}` - Get a specific price rule
+- `POST /price-rules` - Create a new price rule (requires admin auth)
+- `PUT /price-rules/{price_rule_id}` - Update a price rule (requires admin auth)
+- `DELETE /price-rules/{price_rule_id}` - Delete a price rule (requires admin auth)
 
 ## Development
 
@@ -86,4 +138,25 @@ To install the package in development mode:
 
 ```bash
 pip install -e .
+```
+
+### Database Migrations
+
+The project uses Alembic for database migrations. To create and run migrations:
+
+1. Create a new migration:
+```bash
+alembic revision --autogenerate -m "description of changes"
+```
+
+2. Apply migrations:
+```bash
+python run_migrations.py
+```
+
+### Testing
+
+Run tests using pytest:
+```bash
+pytest
 ``` 
