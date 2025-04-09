@@ -1,0 +1,38 @@
+.toggleButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.375rem;
+  padding: 0.5rem 0.75rem;
+  background-color: white;
+  color: black;
+  transition-property: background-color, border-color, color;
+  transition-duration: 200ms;
+  border: 1px solid #d1d5db;
+  outline: none;
+}
+
+:global(.dark) .toggleButton {
+  background-color: black;
+  color: white;
+  border-color: #4b5563;
+}
+
+.toggleButton:hover {
+  background-color: #eff6ff;
+}
+
+:global(.dark) .toggleButton:hover {
+  background-color: #172554;
+}
+
+.icon {
+  height: 1.25rem;
+  width: 1.25rem;
+}
+
+.label {
+  margin-left: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+} 
