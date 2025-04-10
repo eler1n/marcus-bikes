@@ -127,6 +127,12 @@ docker-compose logs -f
 docker-compose down
 ```
 
+The first time you run docker and the services are created, run the following to populate the DB:
+
+```bash
+python seed.py  # Populate with initial data (optional)
+```
+
 The applications will be available at:
 - Frontend: http://localhost:3000
 - Backend API: http://localhost:8000
