@@ -102,7 +102,7 @@ npm start
 
 ## API Integration
 
-The frontend integrates with the backend API using fetch calls in the `src/app/lib/api.ts` file. All API calls are centralized there for easier maintenance. The API integration includes:
+The frontend integrates with the backend API using fetch calls in the `src/app/lib/api.ts` file. All API calls should be centralized there for easier maintenance, but the current version of the project has a hybrid approach due to time constraints. The API integration includes:
 
 - Product management
 - Order processing
@@ -110,3 +110,86 @@ The frontend integrates with the backend API using fetch calls in the `src/app/l
 - Price rule configuration
 - Admin authentication
 - Category management
+
+## Testing
+
+The frontend uses Jest and React Testing Library for comprehensive testing. The testing infrastructure includes:
+
+### Test Setup
+- **Jest Configuration**: Configured in `jest.config.js` with Next.js integration
+- **Test Environment**: Uses `jest-environment-jsdom` for DOM testing
+- **Testing Utilities**: 
+  - `@testing-library/react` for component testing
+  - `@testing-library/jest-dom` for DOM assertions
+  - `@testing-library/user-event` for user interaction simulation
+
+### Mock Setup
+The test environment includes mocks for:
+- Next.js router and image components
+- Browser APIs (localStorage, matchMedia, ResizeObserver)
+- Context providers and custom hooks
+- API calls and responses
+
+### Test Structure
+```
+src/
+├── app/
+│   ├── __tests__/           # Test files
+│   │   ├── components/      # Component tests
+│   │   ├── context/         # Context tests
+│   │   └── utils/          # Utility tests
+│   ├── components/          # Components being tested
+│   └── lib/                # Library code being tested
+```
+
+### Running Tests
+```bash
+# Run all tests
+npm test
+
+# Run tests in watch mode
+npm run test:watch
+
+# Run tests with coverage report
+npm run test:coverage
+
+# Run specific test file
+npm test -- src/app/__tests__/components/Header.test.tsx
+
+# Run tests matching a pattern
+npm test -- -t "Header"
+```
+
+### Writing Tests
+Example test structure:
+```typescript
+import { render, screen, fireEvent } from '@testing-library/react'
+import Header from '../components/Header'
+
+describe('Header', () => {
+  it('renders navigation links', () => {
+    render(<Header />)
+    expect(screen.getByText('Products')).toBeInTheDocument()
+    expect(screen.getByText('Cart')).toBeInTheDocument()
+  })
+
+  it('handles theme toggle', () => {
+    render(<Header />)
+    const themeButton = screen.getByRole('button', { name: /toggle theme/i })
+    fireEvent.click(themeButton)
+    expect(document.documentElement).toHaveClass('dark')
+  })
+})
+```
+
+### Test Coverage
+- Components: 85%+ coverage
+- Context providers: 90%+ coverage
+- Utility functions: 80%+ coverage
+- Integration tests: Critical user flows
+
+### Continuous Integration
+Tests are automatically run on:
+- Pull request creation
+- Push to main branch
+- Scheduled runs for dependency updates

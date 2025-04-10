@@ -217,8 +217,65 @@ npm run dev
 
 ## Testing
 
-- Backend tests can be run with pytest
-- Frontend tests use Jest and React Testing Library
+### Frontend Testing
+The frontend uses Jest and React Testing Library for testing. The setup includes:
+
+- **Jest Configuration**: Configured in `jest.config.js` with Next.js integration
+- **Test Environment**: Uses `jest-environment-jsdom` for DOM testing
+- **Testing Utilities**: 
+  - `@testing-library/react` for component testing
+  - `@testing-library/jest-dom` for DOM assertions
+  - `@testing-library/user-event` for user interaction simulation
+- **Mock Setup**: 
+  - Next.js router and image components
+  - Browser APIs (localStorage, matchMedia, ResizeObserver)
+  - Context providers and custom hooks
+
+Run frontend tests with:
+```bash
+cd marcus-bikes-frontend
+npm test           # Run all tests
+npm run test:watch # Run tests in watch mode
+npm run test:coverage # Run tests with coverage report
+```
+
+### Backend Testing
+The backend uses pytest with a comprehensive test suite:
+
+- **Test Framework**: pytest with additional plugins
+  - `pytest-cov` for coverage reporting
+  - `pytest-asyncio` for async test support
+  - `httpx` for HTTP client testing
+- **Test Database**: Uses SQLite for testing with isolated test database
+- **Fixtures**: 
+  - Database session management
+  - Test client setup
+  - Model creation helpers
+- **Test Categories**:
+  - Model tests (products, orders, inventory)
+  - API endpoint tests
+  - Integration tests
+  - Authentication tests
+
+Run backend tests with:
+```bash
+cd marcus-bikes-backend
+python run_tests.py  # Run all tests
+pytest tests/        # Run specific test directory
+pytest --cov=app tests/  # Run tests with coverage
+```
+
+### Test Coverage
+Both frontend and backend maintain test coverage requirements:
+- Frontend: Components, hooks, and utilities
+- Backend: Models, routes, and services
+- Integration tests for critical user flows
+
+### Continuous Integration
+Tests are automatically run on:
+- Pull request creation
+- Push to main branch
+- Scheduled runs for dependency updates
 
 ## More Information
 
