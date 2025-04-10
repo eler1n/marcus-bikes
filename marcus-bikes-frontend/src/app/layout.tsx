@@ -3,10 +3,10 @@ import { Inter } from "next/font/google";
 import "./styles/globals.css";
 import { CustomizationProvider } from "./lib/context/CustomizationContext";
 import { ThemeProvider } from "./lib/context/ThemeContext";
-import Header from "./components/Header";
 import { ToastProvider } from "./components/ToastContainer";
 import BackToTop from "./components/BackToTop";
 import styles from "./styles/layout.module.css";
+import FactorialPanelWrapper from "./components/FactorialPanelWrapper";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -46,10 +46,9 @@ export default function RootLayout({
           <CustomizationProvider>
             <ToastProvider>
               <div className={styles.wrapper}>
-                <Header />
-                <main className={styles.main}>
+                <FactorialPanelWrapper>
                   {children}
-                </main>
+                </FactorialPanelWrapper>
                 <footer className={styles.footer}>
                   <div className={styles.footerContainer}>
                     <div className={styles.footerText}>

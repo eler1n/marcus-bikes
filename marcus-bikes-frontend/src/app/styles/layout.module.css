@@ -15,6 +15,273 @@
   padding-bottom: 4rem;
 }
 
+.factorialPanel {
+  max-width: 80rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 2rem;
+  min-height: 50vh;
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  animation: fadeIn 0.3s ease-out;
+}
+
+:global(.dark) .factorialPanel {
+  background-color: #1f2937;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+}
+
+.factorialContent {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  max-width: 60rem;
+  margin: 0 auto;
+}
+
+.factorialTitle {
+  font-size: 2.5rem;
+  font-weight: 800;
+  text-align: center;
+  background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin-bottom: 1rem;
+}
+
+:global(.dark) .factorialTitle {
+  background: linear-gradient(90deg, #60a5fa, #a78bfa);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.factorialStats {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin: 1rem 0;
+}
+
+.statItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 1rem;
+  background-color: rgba(59, 130, 246, 0.1);
+  border-radius: 0.5rem;
+  min-width: 200px;
+  transition: transform 0.2s ease;
+}
+
+.statItem:hover {
+  transform: translateY(-5px);
+}
+
+:global(.dark) .statItem {
+  background-color: rgba(96, 165, 250, 0.1);
+}
+
+.statNumber {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #3b82f6;
+  margin-bottom: 0.5rem;
+}
+
+:global(.dark) .statNumber {
+  color: #60a5fa;
+}
+
+.statLabel {
+  font-size: 0.875rem;
+  color: #4b5563;
+}
+
+:global(.dark) .statLabel {
+  color: #d1d5db;
+}
+
+.factorialFeatures {
+  margin: 2rem 0;
+}
+
+.featuresTitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: #1f2937;
+}
+
+:global(.dark) .featuresTitle {
+  color: #f3f4f6;
+}
+
+.featuresList {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  list-style: none;
+  padding: 0;
+}
+
+.featureItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: #f9fafb;
+  border-radius: 0.5rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.featureItem:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+:global(.dark) .featureItem {
+  background-color: #374151;
+}
+
+.featureIcon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.featureText {
+  font-size: 0.875rem;
+  color: #4b5563;
+}
+
+:global(.dark) .featureText {
+  color: #d1d5db;
+}
+
+.factorialTestimonial {
+  margin: 2rem 0;
+  padding: 2rem;
+  background-color: #f3f4f6;
+  border-radius: 0.5rem;
+  position: relative;
+}
+
+:global(.dark) .factorialTestimonial {
+  background-color: #374151;
+}
+
+.testimonialQuote {
+  font-size: 1.125rem;
+  font-style: italic;
+  color: #4b5563;
+  margin: 0;
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.testimonialQuote::before {
+  content: '"';
+  font-size: 3rem;
+  position: absolute;
+  left: -1rem;
+  top: -0.5rem;
+  color: rgba(59, 130, 246, 0.3);
+}
+
+:global(.dark) .testimonialQuote {
+  color: #d1d5db;
+}
+
+:global(.dark) .testimonialQuote::before {
+  color: rgba(96, 165, 250, 0.3);
+}
+
+.testimonialAuthor {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.authorName {
+  font-weight: 600;
+  color: #1f2937;
+}
+
+:global(.dark) .authorName {
+  color: #f3f4f6;
+}
+
+.authorRole {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+:global(.dark) .authorRole {
+  color: #9ca3af;
+}
+
+.factorialCTA {
+  text-align: center;
+  margin: 2rem 0;
+}
+
+:global(.dark) .modalButton {
+  color: #f3f4f6;
+}
+.modalButton {
+  color: black;
+  font-weight: 600;
+  border-radius: 0.375rem;
+  text-decoration: none;
+}
+
+.ctaText {
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  color: #1f2937;
+}
+
+:global(.dark) .ctaText {
+  color: #f3f4f6;
+}
+
+.ctaButton {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background-color: #3b82f6;
+  color: white;
+  font-weight: 600;
+  border-radius: 0.375rem;
+  text-decoration: none;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.ctaButton:hover {
+  background-color: #2563eb;
+  transform: translateY(-2px);
+}
+
+:global(.dark) .ctaButton {
+  background-color: #60a5fa;
+}
+
+:global(.dark) .ctaButton:hover {
+  background-color: #3b82f6;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 .footer {
   background-color: #1e40af;
   color: white;
@@ -110,4 +377,366 @@
 
 .footerLink:hover::after {
   width: 100%;
+}
+
+.emojiParty {
+  text-align: center;
+  padding: 2rem;
+  background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+  border-radius: 1rem;
+  margin: 2rem 0;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.emojiParty:hover {
+  transform: scale(1.02);
+}
+
+.emojiParty h3 {
+  color: #fff;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.emojiParty p {
+  color: #fff;
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modalContent {
+  background: white;
+  padding: 2.5rem;
+  border-radius: 1rem;
+  position: relative;
+  max-width: 90%;
+  width: 500px;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  animation: modalFadeIn 0.3s ease-out;
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modalClose {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #666;
+  transition: color 0.2s;
+}
+
+.modalClose:hover {
+  color: #333;
+}
+
+.modalGif {
+  margin: 1.5rem auto;
+  max-width: 100%;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.gifImage {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  border-radius: 0.5rem;
+}
+
+.modalText {
+  font-size: 1.4rem;
+  color: #333;
+  margin: 1.5rem 0 0.5rem;
+  line-height: 1.5;
+  font-weight: 500;
+}
+
+.pixelArtText {
+  color: greenyellow;
+}
+
+.pixelArt {
+  background: #f5f5f5;
+  padding: 2rem;
+  border-radius: 1rem;
+  margin: 2rem 0;
+  font-family: monospace;
+  white-space: pre;
+  overflow-x: auto;
+  line-height: 1;
+  font-size: 12px;
+}
+
+.clickCounter {
+  text-align: center;
+  margin: 2rem auto;
+  width: 100%;
+  max-width: 700px;
+  padding: 2rem;
+  background-color: #ffffff;
+  border-radius: 1rem;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  border: 3px solid #3b82f6;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.clickCounter::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 8px;
+  background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+}
+
+.clickCounterText {
+  font-size: 2.2rem;
+  color: #000;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  letter-spacing: -0.5px;
+}
+
+.clickMessage {
+  font-style: italic;
+  color: #333;
+  margin-top: 0.5rem;
+  font-weight: 600;
+  font-size: 1.5rem;
+  line-height: 1.4;
+  max-width: 90%;
+}
+
+.clickCounterButton {
+  display: block;
+  margin: 1.5rem auto;
+  padding: 0.8rem 1.5rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+  color: white;
+  border: none;
+  border-radius: 2rem;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s, box-shadow 0.2s;
+  animation: pulse 2s infinite;
+}
+
+.clickCounterButton:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .modalContent {
+    background: #1f2937;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+  }
+
+  .modalClose {
+    color: black;
+  }
+
+  .modalClose:hover {
+    color: #fff;
+  }
+
+  .modalText {
+    color: black;
+  }
+
+  .pixelArt {
+    background: #2a2a2a;
+  }
+
+  .clickCounter {
+    color: #ffffff;
+    background-color: #1f2937;
+    border: 3px solid #60a5fa;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+  }
+
+  .clickCounter::before {
+    background: linear-gradient(90deg, #60a5fa, #a78bfa);
+  }
+
+  .clickCounterText {
+    color: #ffffff;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  }
+
+  .clickMessage {
+    color: black;
+  }
+}
+
+.interactiveContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.emojiParty {
+  font-size: 2rem;
+  text-align: center;
+  padding: 1rem;
+  background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+  border-radius: 1rem;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.emojiParty:hover {
+  transform: scale(1.05);
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modalContent {
+  background: white;
+  padding: 2rem;
+  border-radius: 1rem;
+  position: relative;
+  max-width: 90%;
+  width: 500px;
+}
+
+.modalClose {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.modalGif {
+  font-size: 4rem;
+  text-align: center;
+  margin: 1rem 0;
+}
+
+.modalText {
+  text-align: center;
+}
+
+.pixelArt {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.colorPicker {
+  margin-bottom: 1rem;
+}
+
+.pixelGrid {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ccc;
+  background: white;
+}
+
+.pixelRow {
+  display: flex;
+}
+
+.pixel {
+  width: 20px;
+  height: 20px;
+  border: 1px solid #eee;
+  cursor: crosshair;
+}
+
+.clickCounter {
+  text-align: center;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 1rem;
+}
+
+.clickMessage {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.clickCounter button {
+  padding: 0.5rem 1rem;
+  font-size: 1.2rem;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.clickCounter button:hover {
+  background: #0056b3;
 } 
