@@ -9,12 +9,10 @@ import DependenciesSection, { Dependency } from '@/app/components/DependenciesSe
 
 interface Component {
   id: number;
-  component_id: number;
   name: string;
   description: string;
   options: Array<{
     id: number;
-    option_id: number;
     name: string;
     price: number;
   }>;
@@ -96,23 +94,13 @@ export default function ProductEditPage({ params }: { params: { id: string } }) 
           base_price: data.basePrice || 0, // Map basePrice to base_price for frontend model
           // Ensure components have numeric IDs
           components: data.components ? data.components.map((comp: any) => {
-            const componentId = typeof comp.component_id === 'string' 
-              ? parseIdToNumber(comp.component_id) 
-              : (comp.component_id || 0);
-              
             return {
               ...comp,
               id: typeof comp.id === 'string' ? parseIdToNumber(comp.id) : comp.id,
-              component_id: componentId,
               options: comp.options ? comp.options.map((opt: any) => {
-                const optionId = typeof opt.option_id === 'string'
-                  ? parseIdToNumber(opt.option_id)
-                  : (opt.option_id || 0);
-                  
                 return {
                   ...opt,
                   id: typeof opt.id === 'string' ? parseIdToNumber(opt.id) : opt.id,
-                  option_id: optionId,
                   price: typeof opt.price === 'string' ? parseFloat(opt.price) : opt.price
                 };
               }) : []
@@ -249,10 +237,8 @@ export default function ProductEditPage({ params }: { params: { id: string } }) 
         // For update requests, we need to ensure components have proper structure
         components: product.components.map(component => ({
           ...component,
-          component_id: component.component_id || Date.now(),
           options: component.options.map(option => ({
-            ...option,
-            option_id: option.option_id || Date.now()
+            ...option
           }))
         })),
         // Format dependencies for the API
@@ -329,10 +315,8 @@ export default function ProductEditPage({ params }: { params: { id: string } }) 
 
   const addComponent = () => {
     const timestamp = Date.now();
-    const newComponentId = timestamp;
     const newComponent = {
       id: timestamp,
-      component_id: newComponentId,
       name: '',
       description: '',
       options: []
@@ -351,13 +335,13 @@ export default function ProductEditPage({ params }: { params: { id: string } }) 
     };
     
     // If it's a new component and the name is being updated, update the component_id too
-    if (field === 'name' && (!updatedComponents[index].component_id || updatedComponents[index].component_id === 0)) {
+    if (field === 'name' && (!updatedComponents[index].id || updatedComponents[index].id === 0)) {
       // Convert the name to a numeric hash
       const numericId = Math.abs(value.toLowerCase().split('').reduce((acc: number, char: string) => {
         return acc + char.charCodeAt(0);
       }, 0));
       
-      updatedComponents[index].component_id = numericId;
+      updatedComponents[index].id = numericId;
     }
     
     setProduct({
@@ -377,11 +361,9 @@ export default function ProductEditPage({ params }: { params: { id: string } }) 
 
   const addOption = (componentIndex: number) => {
     const timestamp = Date.now();
-    const newOptionId = timestamp;
     const updatedComponents = [...product.components];
     updatedComponents[componentIndex].options.push({
       id: timestamp,
-      option_id: newOptionId,
       name: '',
       price: 0
     });
@@ -408,16 +390,6 @@ export default function ProductEditPage({ params }: { params: { id: string } }) 
         ...option,
         [field]: value
       };
-      
-      // If it's a new option and the name is being updated, update the option_id too
-      if (field === 'name' && (!option.option_id || option.option_id === 0)) {
-        // Convert the name to a numeric hash
-        const numericId = Math.abs(value.toLowerCase().split('').reduce((acc: number, char: string) => {
-          return acc + char.charCodeAt(0);
-        }, 0));
-        
-        updatedComponents[componentIndex].options[optionIndex].option_id = numericId;
-      }
     }
     
     setProduct({
@@ -618,7 +590,7 @@ export default function ProductEditPage({ params }: { params: { id: string } }) 
           ) : (
             <div className="space-y-6">
               {product.components.map((component, componentIndex) => (
-                <div key={component.component_id} className="border border-gray-200 rounded-lg p-4">
+                <div key={component.id} className="border border-gray-200 rounded-lg p-4">
                   <div className="flex justify-between items-start mb-4">
                     <div className="flex-1">
                       <div className="grid grid-cols-1 gap-4 mb-4">
@@ -741,7 +713,7 @@ export default function ProductEditPage({ params }: { params: { id: string } }) 
             // Important: We need to pass the actual component ID as the ID for component lookup
             return {
               id: comp.id,  // This must match the source_component_id in dependencies
-              component_id: comp.component_id,
+              component_id: comp.id,
               name: comp.name,
               options: comp.options.map(opt => {
                 return {
@@ -787,7 +759,7 @@ export default function ProductEditPage({ params }: { params: { id: string } }) 
           const mappedComponents = product.components.map(comp => {
             return {
               id: comp.id,
-              component_id: comp.component_id, 
+              component_id: comp.id, 
               name: comp.name,
               options: comp.options.map(opt => {
                 return {
