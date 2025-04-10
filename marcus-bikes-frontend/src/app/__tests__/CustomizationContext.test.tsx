@@ -13,6 +13,7 @@ const mockProduct: Product = {
     {
       id: 1,
       name: 'Frame',
+      description: 'Choose your bike frame',
       options: [
         { id: 1, name: 'Option 1', price: 100, inStock: true },
         { id: 2, name: 'Option 2', price: 200, inStock: true },
@@ -21,6 +22,7 @@ const mockProduct: Product = {
     {
       id: 2,
       name: 'Wheels',
+      description: 'Select your wheel type',
       options: [
         { id: 3, name: 'Option 3', price: 150, inStock: true },
         { id: 4, name: 'Option 4', price: 250, inStock: true },
