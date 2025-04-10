@@ -28,7 +28,7 @@ describe('Header', () => {
     return render(
       <ThemeProvider>
         <CustomizationProvider>
-          <Header />
+          <Header onFactorialClick={() => {}} />
         </CustomizationProvider>
       </ThemeProvider>
     )

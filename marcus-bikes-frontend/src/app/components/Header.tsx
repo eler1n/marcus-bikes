@@ -7,7 +7,11 @@ import { useState, useEffect } from 'react';
 import ThemeToggle from './ThemeToggle';
 import styles from '../styles/header.module.css';
 
-export default function Header() {
+interface HeaderProps {
+  onFactorialClick: () => void;
+}
+
+export default function Header({ onFactorialClick }: HeaderProps) {
   const pathname = usePathname();
   const { cart } = useCustomization();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -86,6 +90,19 @@ export default function Header() {
             >
               About
             </Link>
+            <div 
+              className={styles.factorialTag}
+              onClick={onFactorialClick}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  onFactorialClick();
+                }
+              }}
+            >
+              Factorial rocks
+            </div>
             {showAdminLink && (
               <Link
                 href="/admin"
